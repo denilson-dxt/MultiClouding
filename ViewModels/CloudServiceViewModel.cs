@@ -13,11 +13,17 @@ public class CloudServiceViewModel: ViewModelBase
     }
 
     private string _name;
-
     public string Name
     {
         get => _name;
         set => this.RaiseAndSetIfChanged(ref _name, value);
+    }
+
+    private string _icon;
+    public string Icon
+    {
+        get => _icon;
+        set => this.RaiseAndSetIfChanged(ref _icon, value);
     }
     
     public CloudServiceViewModel(ICloudService service)

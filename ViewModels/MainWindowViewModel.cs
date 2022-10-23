@@ -11,27 +11,47 @@ using Avalonia.Threading;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v2;
 using Google.Apis.Services;
+using MultiClouding.Enums;
 using ReactiveUI;
 
 namespace MultiClouding.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-
-        private ObservableCollection<FileViewModel> _files = new ObservableCollection<FileViewModel>()
+        private ObservableCollection<CloudServiceViewModel> _services;
+        public ObservableCollection<CloudServiceViewModel> Services
         {
-            new FileViewModel(){Name = "The hidden.mp4", Size = "1.2 GB", LastModified = DateTime.Now},
-            new FileViewModel(){Name = "The hidden.mp4", Size = "1.2 GB", LastModified = DateTime.Now},
-            new FileViewModel(){Name = "The hidden.mp4", Size = "1.2 GB", LastModified = DateTime.Now},
-            new FileViewModel(){Name = "David Guetta - lovers.mp3", Size = "1.2 GB", LastModified = DateTime.Now},
-            new FileViewModel(){Name = "script.js", Size = "1.2 GB", LastModified = DateTime.Now},
-            new FileViewModel(){Name = "Avatar.png", Size = "0.2 MB", LastModified = DateTime.Now},
-            new FileViewModel(){Name = "Avatar.png", Size = "3.2 MB", LastModified = DateTime.Now},
-            new FileViewModel(){Name = "Avatar.png", Size = "8.2 MB", LastModified = DateTime.Now},
-            new FileViewModel(){Name = "Avatar.png", Size = "2.2 MB", LastModified = DateTime.Now},
-            new FileViewModel(){Name = "Avatar.png", Size = "3.2 MB", LastModified = DateTime.Now},
-            new FileViewModel(){Name = "Avatar.png", Size = "5.2 MB", LastModified = DateTime.Now},
-        };
+            get => _services;
+            set => this.RaiseAndSetIfChanged(ref _services, value);
+        }
+
+        private CloudServiceViewModel _selectedService;
+
+        public CloudServiceViewModel SelectedService
+        {
+            get => _selectedService;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedService, value);
+                if (SelectedService != null)
+                {
+                    Files = new ObservableCollection<FileViewModel>();
+                    Folders = new ObservableCollection<FileViewModel>();
+                    _getFiles();
+                }
+                
+            }
+        }
+
+        private ObservableCollection<FileViewModel> _folders = new ObservableCollection<FileViewModel>();
+
+        public ObservableCollection<FileViewModel> Folders
+        {
+            get => _folders;
+            set => this.RaiseAndSetIfChanged(ref _folders, value);
+        }
+        
+        private ObservableCollection<FileViewModel> _files = new ObservableCollection<FileViewModel>();
 
         public ObservableCollection<FileViewModel> Files
         {
@@ -40,6 +60,7 @@ namespace MultiClouding.ViewModels
         }
         public MainWindowViewModel()
         {
+            Services = new ObservableCollection<CloudServiceViewModel>();
             ShowAddAccountsWindow = new Interaction<AddAccountsWindowViewModel, Unit>();
 
             Task.Run(()=>
@@ -48,28 +69,24 @@ namespace MultiClouding.ViewModels
                 {
                     var add = new AddAccountsWindowViewModel();
                     var r = await ShowAddAccountsWindow.Handle(add);
+                    Services = add.Services;
                 });
             });
 
 
         }
-
-        private async Task GetFiles()
+        
+        private async Task _getFiles()
         {
-            UserCredential credential;
-            using (var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.ReadWrite))
+            var files = await SelectedService.Service.GetFiles();
+            foreach (var file in files)
             {
-                credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(stream).Secrets,
-                    new[] {"https://www.googleapis.com/auth/drive.readonly"}, "user", CancellationToken.None);
+                var fileViewModel = new FileViewModel(file);
+                if(fileViewModel.Type == CloudFileType.File)
+                    Files.Add(fileViewModel);
+                else
+                    Folders.Add(fileViewModel);
             }
-
-            var service = new DriveService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = "Multi-clouding"
-            });
-            var files = service.Files.List().Execute();
-            
         }
         
         public Interaction<AddAccountsWindowViewModel, Unit> ShowAddAccountsWindow { get; set; }

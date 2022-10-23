@@ -1,4 +1,6 @@
 using System;
+using MultiClouding.Enums;
+using MultiClouding.Models;
 using ReactiveUI;
 
 namespace MultiClouding.ViewModels;
@@ -19,11 +21,26 @@ public class FileViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _size, value);
     }
 
+    private CloudFileType _type;
+
+    public CloudFileType Type
+    {
+        get => _type;
+        set => this.RaiseAndSetIfChanged(ref _type, value);
+    }
+    
     private DateTime _lastModified;
     public DateTime LastModified
     {
         get => _lastModified;
         set => this.RaiseAndSetIfChanged(ref _lastModified, value);
+    }
+
+    public FileViewModel(CloudFile file)
+    {
+        Name = file.Name;
+        Type = file.Type;
+        LastModified = file.ModifiedAt;
     }
     
 }

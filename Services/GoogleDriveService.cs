@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
@@ -5,6 +6,7 @@ using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v2;
 using Google.Apis.Services;
+using MultiClouding.Enums;
 using MultiClouding.Interfaces;
 using MultiClouding.Models;
 
@@ -37,10 +39,19 @@ public class GoogleDriveService : ICloudService
     public async Task<List<CloudFile>> GetFiles()
     {
         var files = new List<CloudFile>();
-        var dFiles = _service.Files.List().Execute();
+        var request = _service.Files.List();
+        request.Q = "'root' in parents";
+        request.OrderBy = "folder";
+        var dFiles = request.Execute();
         foreach (var file in dFiles.Items)
         {
-            files.Add(new CloudFile(){Name = file.OriginalFilename});
+            files.Add(new CloudFile()
+            {
+                Name = file.Title,
+                Link = file.AlternateLink,
+                ModifiedAt = (DateTime) file.ModifiedDate,
+                Type = file.AlternateLink.Contains("folders") ? CloudFileType.Folder : CloudFileType.File
+            });
         }
 
         return files;

@@ -126,7 +126,9 @@
                 <Separator Grid.Column="1" Background="#21242e"></Separator>
                 <Border Grid.Column="2" Padding="15" Background="Transparent">
                     <Grid RowDefinitions="Auto, 50 ,*">
-                        <ListBox>
+                        <ListBox 
+                            SelectedItem="{Binding SelectedService}"
+                            Items="{Binding Services}">
                             <ListBox.Styles>
                                 <Style Selector="ListBox">
                                     <Setter Property="Background" Value="Transparent" />
@@ -169,7 +171,7 @@
                                                                 <StackPanel VerticalAlignment="Bottom">
                                                                     <TextBlock
                                                                         Margin="0,0,0,15"
-                                                                        Text="{Binding}" />
+                                                                        Text="{Binding Name}" />
                                                                     <ProgressBar
                                                                         Value="40"
                                                                         Background="#35373d"
@@ -245,7 +247,7 @@
                                                                 <StackPanel VerticalAlignment="Bottom">
                                                                     <TextBlock
                                                                         Margin="0,0,0,15"
-                                                                        Text="{Binding}" />
+                                                                        Text="{Binding Name}" />
                                                                     <ProgressBar
                                                                         Value="40"
                                                                         Background="WhiteSmoke"
@@ -287,9 +289,7 @@
                                     </Setter>
                                 </Style>
                             </ListBox.Styles>
-                            <ListBoxItem>DropBox</ListBoxItem>
-                            <ListBoxItem>Google Drive</ListBoxItem>
-                            <ListBoxItem>Microsoft OneDrive</ListBoxItem>
+                           
 
                         </ListBox>
                         <Panel Grid.Row="1" Margin="0,0,0,10">
@@ -299,7 +299,7 @@
                             <StackPanel>
                                 <StackPanel Margin="0,10,0,0">
                                     <TextBlock Text="Folders" Margin="0,0,0,10" />
-                                    <ListBox>
+                                    <ListBox Items="{Binding Folders}">
                                         <ListBox.Styles>
                                             <Style Selector="ListBox">
                                                 <Setter Property="Background" Value="Transparent" />
@@ -342,7 +342,7 @@
                                                                             <StackPanel VerticalAlignment="Bottom">
                                                                                 <TextBlock
                                                                                     Margin="0,0,0,5"
-                                                                                    Text="{Binding}" />
+                                                                                    Text="{Binding Name}" />
 
                                                                                 <Panel Margin="0,0,0,0">
                                                                                     <Panel.Styles>
@@ -357,7 +357,7 @@
                                                                                         </Style>
                                                                                     </Panel.Styles>
                                                                                     <TextBlock Text="Modified at: " />
-                                                                                    <TextBlock Text="10/10/2021"
+                                                                                    <TextBlock Text="{Binding LastModified}"
                                                                                         HorizontalAlignment="Right" />
                                                                                 </Panel>
                                                                             </StackPanel>
@@ -382,13 +382,7 @@
                                             </Style>
 
                                         </ListBox.Styles>
-                                        <ListBoxItem>My files</ListBoxItem>
-                                        <ListBoxItem>Movies</ListBoxItem>
-                                        <ListBoxItem>Musics</ListBoxItem>
-                                        <ListBoxItem>Programs</ListBoxItem>
-                                        <ListBoxItem>Backup</ListBoxItem>
-
-
+                                        
                                     </ListBox>
                                 </StackPanel>
                                 <StackPanel Margin="0, 10,0,0">
