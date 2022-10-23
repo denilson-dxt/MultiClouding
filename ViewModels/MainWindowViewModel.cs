@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Reactive;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Avalonia.Threading;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v2;
 using Google.Apis.Services;
@@ -28,12 +31,6 @@ namespace MultiClouding.ViewModels
             new FileViewModel(){Name = "Avatar.png", Size = "2.2 MB", LastModified = DateTime.Now},
             new FileViewModel(){Name = "Avatar.png", Size = "3.2 MB", LastModified = DateTime.Now},
             new FileViewModel(){Name = "Avatar.png", Size = "5.2 MB", LastModified = DateTime.Now},
-
-
-
-
-
-
         };
 
         public ObservableCollection<FileViewModel> Files
@@ -43,10 +40,18 @@ namespace MultiClouding.ViewModels
         }
         public MainWindowViewModel()
         {
-            Task.Run(async ()=>
+            ShowAddAccountsWindow = new Interaction<AddAccountsWindowViewModel, Unit>();
+
+            Task.Run(()=>
             {
-                //await GetFiles();
+                Dispatcher.UIThread.InvokeAsync(async () =>
+                {
+                    var add = new AddAccountsWindowViewModel();
+                    var r = await ShowAddAccountsWindow.Handle(add);
+                });
             });
+
+
         }
 
         private async Task GetFiles()
@@ -66,5 +71,8 @@ namespace MultiClouding.ViewModels
             var files = service.Files.List().Execute();
             
         }
+        
+        public Interaction<AddAccountsWindowViewModel, Unit> ShowAddAccountsWindow { get; set; }
+        public ReactiveCommand<Unit, Unit> Test { get; set; }
     }
 }

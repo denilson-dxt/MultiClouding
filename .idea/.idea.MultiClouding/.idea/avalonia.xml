@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="App.axaml" value="MultiClouding.csproj" />
+        <entry key="Views/AddAccountsWindow.axaml" value="MultiClouding.csproj" />
         <entry key="Views/MainWindow.axaml" value="MultiClouding.csproj" />
       </map>
     </option>

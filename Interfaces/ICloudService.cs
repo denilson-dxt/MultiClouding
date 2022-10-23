@@ -6,7 +6,8 @@ namespace MultiClouding.Interfaces;
 
 public interface ICloudService
 {
-    public  Task Authenticate();
+    public string GetName();
+    public  Task<ICloudService> Authenticate();
     public Task<List<CloudFile>> GetFiles();
     public Task DownloadFile(CloudFile file);
     public Task UploadFile(CloudFile file);
