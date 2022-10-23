@@ -20,7 +20,7 @@ public class AddAccountsWindowViewModel : ViewModelBase
         Services = new ObservableCollection<CloudServiceViewModel>();
         AddGoogleDriveCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            var service = await new GoogleDriveService().Authenticate();
+            var service = await new MicrosoftOneDriveService().Authenticate();
             var serviceViewModel = new CloudServiceViewModel(service);
             Services.Add(serviceViewModel);
         });
