@@ -1,0 +1,679 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:MultiClouding.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1100" d:DesignHeight="850"
+        x:Class="MultiClouding.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="MultiClouding"
+        TransparencyLevelHint="AcrylicBlur"
+        Background="#16181f"
+        SystemDecorations="None"
+        Width="1100"
+        Height="800"
+        ClipToBounds="True"
+        KeyDown="Window_OnKeyDown"
+        >
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+    <Border Padding="10">
+        <Grid RowDefinitions="30,1, *">
+            <Separator Grid.Row="1" Background="#21242e"></Separator>
+            <Grid Grid.Row="2" ColumnDefinitions="200,2, *, 200" Margin="0,10,0,0">
+                <StackPanel>
+                    <StackPanel.Styles>
+                        <Style Selector="TextBlock.DashboardMenu">
+                            <Setter Property="Grid.Column" Value="1" />
+                            <Setter Property="Foreground" Value="#c0c1c3" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="15,0,0,0" />
+                        </Style>
+                    </StackPanel.Styles>
+                    <StackPanel.Styles>
+                        <Style Selector="Grid.DashboardMenuItem">
+                            <Setter Property="Margin" Value="0,0,0,10" />
+                            <Setter Property="Height" Value="40" />
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Cursor" Value="Hand" />
+
+                        </Style>
+
+                        <Style Selector="Grid.DashboardMenuItem:pointerover">
+                            <Setter Property="Background">
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#181b26" Offset="0.0" />
+                                    <GradientStop Color="#181b26" Offset="0.60" />
+                                    <GradientStop Color="#1e2232" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Setter>
+                        </Style>
+                        <Style Selector="Grid.DashboardMenuItem:pointerover > TextBlock">
+                            <Setter Property="Foreground" Value="#556ef0" />
+                        </Style>
+                        <Style Selector="Grid.DashboardMenuItem > Image">
+                        </Style>
+
+                    </StackPanel.Styles>
+                    <Grid ColumnDefinitions="20, *" Classes="DashboardMenuItem">
+                        <Image>
+                            <Image.Styles>
+                                <Style Selector="Grid.DashboardMenuItem > Image">
+                                    <Setter Property="Source" Value="/Assets/dashboards.png" />
+                                </Style>
+                                <Style Selector="Grid.DashboardMenuItem:pointerover > Image">
+                                    <Setter Property="Source" Value="/Assets/dashboards_col.png" />
+                                </Style>
+                            </Image.Styles>
+                        </Image>
+                        <TextBlock
+                            Classes="DashboardMenu"
+                            Text="Dashboard">
+                        </TextBlock>
+                    </Grid>
+                    <Grid ColumnDefinitions="20, *" Classes="DashboardMenuItem">
+                        <Image>
+                            <Image.Styles>
+                                <Style Selector="Grid.DashboardMenuItem > Image">
+                                    <Setter Property="Source" Value="/Assets/star.png" />
+                                </Style>
+                                <Style Selector="Grid.DashboardMenuItem:pointerover > Image">
+                                    <Setter Property="Source" Value="/Assets/star_col.png" />
+                                </Style>
+                            </Image.Styles>
+                        </Image>
+                        <TextBlock
+                            Classes="DashboardMenu"
+                            Text="Starred">
+                        </TextBlock>
+                    </Grid>
+                    <Grid ColumnDefinitions="20, *" Classes="DashboardMenuItem">
+                        <Image>
+                            <Image.Styles>
+                                <Style Selector="Grid.DashboardMenuItem > Image">
+                                    <Setter Property="Source" Value="/Assets/delete.png" />
+                                </Style>
+                                <Style Selector="Grid.DashboardMenuItem:pointerover > Image">
+                                    <Setter Property="Source" Value="/Assets/delete_col.png" />
+                                </Style>
+                            </Image.Styles>
+                        </Image>
+                        <TextBlock
+                            Classes="DashboardMenu"
+                            Text="Recycle bin">
+                        </TextBlock>
+                    </Grid>
+                    <Grid ColumnDefinitions="20, *" Classes="DashboardMenuItem">
+                        <Image>
+                            <Image.Styles>
+                                <Style Selector="Grid.DashboardMenuItem > Image">
+                                    <Setter Property="Source" Value="/Assets/group.png" />
+                                </Style>
+                                <Style Selector="Grid.DashboardMenuItem:pointerover > Image">
+                                    <Setter Property="Source" Value="/Assets/group_col.png" />
+                                </Style>
+                            </Image.Styles>
+                        </Image>
+                        <TextBlock
+                            Classes="DashboardMenu"
+                            Text="Shared file">
+                        </TextBlock>
+                    </Grid>
+                </StackPanel>
+                <Separator Grid.Column="1" Background="#21242e"></Separator>
+                <Border Grid.Column="2" Padding="15" Background="Transparent">
+                    <Grid RowDefinitions="Auto, 50 ,*">
+                        <ListBox>
+                            <ListBox.Styles>
+                                <Style Selector="ListBox">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="ItemsPanel">
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                        </ItemsPanelTemplate>
+                                    </Setter>
+                                </Style>
+                                <Style Selector="ListBoxItem">
+                                    <Setter Property="Cursor" Value="Hand" />
+                                    <Setter Property="Width" Value="190" />
+                                    <Setter Property="Height" Value="140" />
+                                    <Setter Property="Margin" Value="0,0,10,10" />
+                                    <Setter Property="CornerRadius" Value="6" />
+                                    <Setter Property="Template">
+                                        <ControlTemplate>
+                                            <ContentPresenter
+                                                Name="PART_ContentPresenter"
+                                                Content="{TemplateBinding Content}">
+                                                <ContentPresenter.ContentTemplate>
+                                                    <DataTemplate>
+                                                        <Border
+                                                            CornerRadius="5"
+                                                            Background="#1f2128"
+                                                            Padding="10">
+                                                            <Panel>
+                                                                <Panel>
+                                                                    <Image
+                                                                        VerticalAlignment="Top"
+                                                                        Width="25"
+                                                                        HorizontalAlignment="Left"
+                                                                        Source="/Assets/avalonia-logo.ico" />
+                                                                    <TextBlock
+                                                                        Text="..."
+                                                                        Cursor="Hand"
+                                                                        Foreground="#515257"
+                                                                        HorizontalAlignment="Right" />
+                                                                </Panel>
+                                                                <StackPanel VerticalAlignment="Bottom">
+                                                                    <TextBlock
+                                                                        Margin="0,0,0,15"
+                                                                        Text="{Binding}" />
+                                                                    <ProgressBar
+                                                                        Value="40"
+                                                                        Background="#35373d"
+                                                                        Foreground="#42519d"
+                                                                        Maximum="100">
+                                                                        <ProgressBar.Styles>
+                                                                            <Style
+                                                                                Selector="ProgressBar:horizontal">
+                                                                                <Setter Property="MinWidth"
+                                                                                    Value="10" />
+                                                                                <Setter Property="MaxWidth"
+                                                                                    Value="170" />
+                                                                                <Setter Property="MaxHeight"
+                                                                                    Value="2" />
+                                                                            </Style>
+                                                                        </ProgressBar.Styles>
+                                                                    </ProgressBar>
+                                                                    <Panel Margin="0,5,0,0">
+                                                                        <Panel.Styles>
+                                                                            <Style Selector="Panel > TextBlock">
+                                                                                <Setter Property="Foreground"
+                                                                                    Value="#515257" />
+                                                                                <Setter Property="FontSize"
+                                                                                    Value="11" />
+                                                                            </Style>
+                                                                        </Panel.Styles>
+                                                                        <TextBlock HorizontalAlignment="Left"
+                                                                            Text="70.1 GB" />
+                                                                        <TextBlock HorizontalAlignment="Right"
+                                                                            Text="80.1 GB" />
+                                                                    </Panel>
+                                                                </StackPanel>
+                                                            </Panel>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ContentPresenter.ContentTemplate>
+                                            </ContentPresenter>
+                                        </ControlTemplate>
+                                    </Setter>
+                                </Style>
+                                <Style
+                                    Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Style>
+                                <Style
+                                    Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                                    <Setter Property="Background" Value="Transparent" />
+                                </Style>
+                                <Style Selector="ListBoxItem:selected">
+                                    <Setter Property="Template">
+                                        <ControlTemplate>
+                                            <ContentPresenter
+                                                Name="PART_ContentPresenter"
+                                                Content="{TemplateBinding Content}">
+                                                <ContentPresenter.ContentTemplate>
+                                                    <DataTemplate>
+                                                        <Border
+                                                            CornerRadius="5"
+                                                            Background="#617afa"
+                                                            Padding="10">
+                                                            <Panel>
+                                                                <Panel>
+                                                                    <Image
+                                                                        VerticalAlignment="Top"
+                                                                        Width="25"
+                                                                        HorizontalAlignment="Left"
+                                                                        Source="/Assets/avalonia-logo.ico" />
+                                                                    <TextBlock
+                                                                        Text="..."
+                                                                        Cursor="Hand"
+                                                                        HorizontalAlignment="Right" />
+                                                                </Panel>
+                                                                <StackPanel VerticalAlignment="Bottom">
+                                                                    <TextBlock
+                                                                        Margin="0,0,0,15"
+                                                                        Text="{Binding}" />
+                                                                    <ProgressBar
+                                                                        Value="40"
+                                                                        Background="WhiteSmoke"
+                                                                        Foreground="#ff7730"
+                                                                        Maximum="100">
+                                                                        <ProgressBar.Styles>
+                                                                            <Style
+                                                                                Selector="ProgressBar:horizontal">
+                                                                                <Setter Property="MinWidth"
+                                                                                    Value="10" />
+                                                                                <Setter Property="MaxWidth"
+                                                                                    Value="170" />
+                                                                                <Setter Property="MaxHeight"
+                                                                                    Value="2" />
+                                                                            </Style>
+                                                                        </ProgressBar.Styles>
+                                                                    </ProgressBar>
+                                                                    <Panel Margin="0,5,0,0">
+                                                                        <Panel.Styles>
+                                                                            <Style Selector="Panel > TextBlock">
+                                                                                <Setter Property="Foreground"
+                                                                                    Value="#9eadfc" />
+                                                                                <Setter Property="FontSize"
+                                                                                    Value="11" />
+                                                                            </Style>
+                                                                        </Panel.Styles>
+                                                                        <TextBlock HorizontalAlignment="Left"
+                                                                            Text="70.1 GB" />
+                                                                        <TextBlock HorizontalAlignment="Right"
+                                                                            Text="80.1 GB" />
+                                                                    </Panel>
+                                                                </StackPanel>
+                                                            </Panel>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </ContentPresenter.ContentTemplate>
+                                            </ContentPresenter>
+                                        </ControlTemplate>
+                                    </Setter>
+                                </Style>
+                            </ListBox.Styles>
+                            <ListBoxItem>DropBox</ListBoxItem>
+                            <ListBoxItem>Google Drive</ListBoxItem>
+                            <ListBoxItem>Microsoft OneDrive</ListBoxItem>
+
+                        </ListBox>
+                        <Panel Grid.Row="1" Margin="0,0,0,10">
+                            <TextBlock Text="Browse files" FontSize="17" VerticalAlignment="Bottom" />
+                        </Panel>
+                        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden">
+                            <StackPanel>
+                                <StackPanel Margin="0,10,0,0">
+                                    <TextBlock Text="Folders" Margin="0,0,0,10" />
+                                    <ListBox>
+                                        <ListBox.Styles>
+                                            <Style Selector="ListBox">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="ItemsPanel">
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel Orientation="Horizontal"></WrapPanel>
+                                                    </ItemsPanelTemplate>
+                                                </Setter>
+                                            </Style>
+                                            <Style Selector="ListBoxItem">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                                <Setter Property="Width" Value="150" />
+                                                <Setter Property="Height" Value="90" />
+                                                <Setter Property="Margin" Value="0,0,10,10" />
+                                                <Setter Property="CornerRadius" Value="6" />
+                                                <Setter Property="Template">
+                                                    <ControlTemplate>
+                                                        <ContentPresenter
+                                                            Name="PART_ContentPresenter"
+                                                            Content="{TemplateBinding Content}">
+                                                            <ContentPresenter.ContentTemplate>
+                                                                <DataTemplate>
+                                                                    <Border
+                                                                        CornerRadius="5"
+                                                                        Background="#1f2128"
+                                                                        Padding="10">
+                                                                        <Panel>
+                                                                            <Panel>
+                                                                                <Image
+                                                                                    VerticalAlignment="Top"
+                                                                                    Width="25"
+                                                                                    HorizontalAlignment="Left"
+                                                                                    Source="/Assets/avalonia-logo.ico" />
+                                                                                <TextBlock
+                                                                                    Text="..."
+                                                                                    Cursor="Hand"
+                                                                                    Foreground="#515257"
+                                                                                    HorizontalAlignment="Right" />
+                                                                            </Panel>
+                                                                            <StackPanel VerticalAlignment="Bottom">
+                                                                                <TextBlock
+                                                                                    Margin="0,0,0,5"
+                                                                                    Text="{Binding}" />
+
+                                                                                <Panel Margin="0,0,0,0">
+                                                                                    <Panel.Styles>
+                                                                                        <Style
+                                                                                            Selector="Panel > TextBlock">
+                                                                                            <Setter
+                                                                                                Property="Foreground"
+                                                                                                Value="#515257" />
+                                                                                            <Setter
+                                                                                                Property="FontSize"
+                                                                                                Value="11" />
+                                                                                        </Style>
+                                                                                    </Panel.Styles>
+                                                                                    <TextBlock Text="Modified at: " />
+                                                                                    <TextBlock Text="10/10/2021"
+                                                                                        HorizontalAlignment="Right" />
+                                                                                </Panel>
+                                                                            </StackPanel>
+                                                                        </Panel>
+                                                                    </Border>
+                                                                </DataTemplate>
+                                                            </ContentPresenter.ContentTemplate>
+                                                        </ContentPresenter>
+                                                    </ControlTemplate>
+                                                </Setter>
+                                            </Style>
+                                            <Style Selector="ListBoxItem:pointerover">
+                                                <Setter Property="Margin" Value="0,2,10,0" />
+                                            </Style>
+                                            <Style
+                                                Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                                                <Setter Property="Background" Value="Transparent" />
+                                            </Style>
+                                            <Style
+                                                Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+                                                <Setter Property="Background" Value="Transparent" />
+                                            </Style>
+
+                                        </ListBox.Styles>
+                                        <ListBoxItem>My files</ListBoxItem>
+                                        <ListBoxItem>Movies</ListBoxItem>
+                                        <ListBoxItem>Musics</ListBoxItem>
+                                        <ListBoxItem>Programs</ListBoxItem>
+                                        <ListBoxItem>Backup</ListBoxItem>
+
+
+                                    </ListBox>
+                                </StackPanel>
+                                <StackPanel Margin="0, 10,0,0">
+                                    <TextBlock Text="Files" Margin="0,0,0,10" />
+                                    <DataGrid Items="{Binding Files}">
+                                        <DataGrid.Styles>
+                                            <Style Selector="DataGrid">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+                                            </Style>
+                                            <Style Selector="DataGridColumnHeader">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="AreSeparatorsVisible" Value="False" />
+                                            </Style>
+                                            <Style Selector="DataGridRow">
+                                                <Setter Property="Margin" Value="0,0,0,15" />
+                                                <Setter Property="Height" Value="50" />
+                                                <Setter Property="Template">
+                                                    <ControlTemplate>
+                                                        <DataGridFrozenGrid Name="PART_Root"
+                                                                            RowDefinitions="*,Auto,Auto"
+                                                                            ColumnDefinitions="Auto,*">
+
+                                                            <Border
+                                                                Margin="0,0,0,2"
+                                                                Name="BackgroundBorder"
+                                                                Grid.RowSpan="2"
+                                                                Grid.ColumnSpan="2" />
+                                                            <Rectangle x:Name="InvalidVisualElement"
+                                                                       Grid.ColumnSpan="2"
+                                                                       Fill="{DynamicResource DataGridRowInvalidBrush}" />
+
+                                                            <DataGridRowHeader Name="PART_RowHeader"
+                                                                               Grid.RowSpan="3"
+                                                                               DataGridFrozenGrid.IsFrozen="True" />
+                                                            <DataGridCellsPresenter Name="PART_CellsPresenter"
+                                                                Grid.Column="1"
+                                                                DataGridFrozenGrid.IsFrozen="True" />
+                                                            <DataGridDetailsPresenter Name="PART_DetailsPresenter"
+                                                                Grid.Row="1"
+                                                                Grid.Column="1"
+                                                                Background="{DynamicResource DataGridDetailsPresenterBackgroundBrush}" />
+                                                            <Rectangle Name="PART_BottomGridLine"
+                                                                       Grid.Row="2"
+                                                                       Grid.Column="1"
+                                                                       HorizontalAlignment="Stretch"
+                                                                       Height="1" />
+
+                                                        </DataGridFrozenGrid>
+                                                    </ControlTemplate>
+                                                </Setter>
+                                            </Style>
+                                            <Style Selector="DataGridRow /template/ Border#BackgroundBorder">
+                                                <Setter Property="Background" Value="#1f2128" />
+                                                <Setter Property="BorderBrush" Value="#2e3341" />
+                                                <Setter Property="CornerRadius" Value="5" />
+                                                <Setter Property="Padding" Value="2" />
+
+                                            </Style>
+                                            <Style
+                                                Selector="DataGridRow:selected /template/ Border#BackgroundBorder">
+                                                <Setter Property="BorderThickness" Value="1" />
+
+                                            </Style>
+                                        </DataGrid.Styles>
+                                        <DataGrid.Columns>
+                                            <DataGridTemplateColumn>
+                                                <DataGridTemplateColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox CornerRadius="6" MinWidth="10" MinHeight="10">
+                                                            <CheckBox.Styles>
+                                                                <Style
+                                                                    Selector="CheckBox /template/ Border#NormalRectangle">
+                                                                    <Setter Property="Width" Value="10" />
+                                                                    <Setter Property="Height" Value="10" />
+                                                                </Style>
+                                                            </CheckBox.Styles>
+                                                        </CheckBox>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <CheckBox CornerRadius="6" Margin="5,0,0,0" />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Width="250">
+                                                <DataGridTemplateColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="Name" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border Background="#35373d" Width="30" Height="30"
+                                                                CornerRadius="5">
+                                                            <Image
+                                                                Width="20"
+                                                                Source="/Assets/avalonia-logo.ico"
+                                                                HorizontalAlignment="Center" />
+                                                        </Border>
+                                                        <TextBlock
+                                                            Foreground="#bababc"
+                                                            VerticalAlignment="Center"
+                                                            Margin="10,0,0,0"
+                                                            Text="{Binding Name}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Width="100">
+                                                <DataGridTemplateColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="Size" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Foreground="#bababc"
+                                                        VerticalAlignment="Center"
+                                                        Margin="10, 0,0,0"
+                                                        Text="{Binding Size}" />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Width="*">
+                                                <DataGridTemplateColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="last modified" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Foreground="#bababc"
+                                                        VerticalAlignment="Center"
+                                                        Margin="10,0,0,0"
+                                                        Text="{Binding LastModified}" />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn>
+                                                <DataGridTemplateColumn.HeaderTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock></TextBlock>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Foreground="#bababc"
+                                                        Margin="10,0,10,0"
+                                                        VerticalAlignment="Center"
+                                                        Text="..." />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+                <Border Grid.Column="3" Background="#1f2128" Margin="0,15,0,0" CornerRadius="5" Padding="10">
+                    <StackPanel>
+                        <StackPanel Height="150">
+                            <TextBlock Text="Storage" />
+                            <Panel>
+                                <Border 
+                                    CornerRadius="250"
+                                    MaxHeight="100"
+                                    BorderThickness="20"
+                                    BorderBrush="#35373d"
+                                    Width="170" Height="100"
+                                    MinHeight="170">
+                                    
+                                </Border>
+                                <Border 
+                                    CornerRadius="250"
+                                    MaxHeight="100"
+                                    BorderThickness="20"
+                                    Width="170" Height="100"
+                                    MinHeight="170">
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush StartPoint="0%, 100%">
+                                            <GradientStop Color="#405ce7" Offset=".8"></GradientStop>
+                                            <GradientStop Color="Transparent" Offset="0"></GradientStop>
+        
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+                                </Border>
+                                <Canvas Background="#1f2128" Margin="0,60,0,0">
+                                    <Image 
+                                        VerticalAlignment="Center"
+                                        Source="/Assets/dropbox.png"
+                                        Margin="75, -30, 0,0"
+                                        Width="30"
+                                        HorizontalAlignment="Center"/>
+                                    
+                                    <Grid 
+                                        RowDefinitions="*,*"
+                                        Margin="8, 10, 0,0"
+                                        >
+                                        <TextBlock 
+                                            Width="170"
+                                            FontSize="20"
+                                            Foreground="#5772f9"
+                                            TextAlignment="Center"
+                                            Text="10.7 GB"/>
+                                        <TextBlock 
+                                            Grid.Row="1"
+                                            TextAlignment="Center"
+                                            Foreground="#4f5156"
+                                            FontSize="12"
+                                            Text="Used of 80 GB"/>
+                                    </Grid>
+                                </Canvas>
+                            </Panel>
+                        </StackPanel>
+                        <Separator Height="2" Background="#21242e" />
+                        <StackPanel>
+                            <StackPanel.Styles>
+                                <Style
+                                    Selector="ProgressBar:horizontal">
+                                    <Setter Property="MinWidth"
+                                            Value="10" />
+                                    <Setter Property="MaxWidth"
+                                            Value="180" />
+                                    <Setter Property="MaxHeight"
+                                            Value="2" />
+                                    <Setter Property="Background" Value="#35373d" />
+                                </Style>
+                            </StackPanel.Styles>
+                            <Grid RowDefinitions="*, *" Margin="0,0,0,15">
+                                <Panel Margin="0, 10,0,5">
+                                    <Image Width="20" Source="/Assets/document.png" HorizontalAlignment="Left" />
+                                    <TextBlock Text="Documents" Margin="30,0,0,0" FontSize="12"
+                                               VerticalAlignment="Bottom" />
+                                    <TextBlock Text="28.8 GB" Foreground="#4f5156" HorizontalAlignment="Right" FontSize="12"
+                                               VerticalAlignment="Bottom" />
+                                </Panel>
+                                <ProgressBar Foreground="#fa457b" Grid.Row="1" Value="60" Maximum="100" />
+                            </Grid>
+                            <Grid RowDefinitions="*, *" Margin="0,0,0,15">
+                                <Panel Margin="0, 10,0,5">
+                                    <Image Width="20" Source="/Assets/gallery.png" HorizontalAlignment="Left" />
+                                    <TextBlock Text="Images" Margin="30,0,0,0" FontSize="12" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="28.8 GB" Foreground="#4f5156" HorizontalAlignment="Right" FontSize="12"
+                                               VerticalAlignment="Bottom" />
+                                </Panel>
+                                <ProgressBar Foreground="#3ed87c" Grid.Row="1" Value="60" Maximum="100" />
+                            </Grid>
+                            <Grid RowDefinitions="*, *" Margin="0,0,0,15">
+                                <Panel Margin="0, 10,0,5">
+                                    <Image Width="20" Source="/Assets/media.png" HorizontalAlignment="Left" />
+                                    <TextBlock Text="Media" Margin="30,0,0,0" FontSize="12" VerticalAlignment="Bottom" />
+                                    <TextBlock Text="28.8 GB" Foreground="#4f5156" HorizontalAlignment="Right" FontSize="12"
+                                               VerticalAlignment="Bottom" />
+                                </Panel>
+                                <ProgressBar Foreground="#ab5dea" Grid.Row="1" Value="30" Maximum="100" />
+                            </Grid>
+                            <Grid RowDefinitions="*, *" Margin="0,0,0,15">
+                                <Panel Margin="0, 10,0,5">
+                                    <Image Width="20" Source="/Assets/blank.png" HorizontalAlignment="Left" />
+                                    <TextBlock Text="Unknown" Margin="30,0,0,0" FontSize="12"
+                                               VerticalAlignment="Bottom" />
+                                    <TextBlock Text="28.8 GB" Foreground="#4f5156" HorizontalAlignment="Right" FontSize="12"
+                                               VerticalAlignment="Bottom" />
+                                </Panel>
+                                <ProgressBar Foreground="#5b6172" Grid.Row="1" Value="10" Maximum="100" />
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Margin="0,20,0,0">
+                            <Border
+                                CornerRadius="5"
+                                BorderDashArray="5, 5"
+                                Height="60"
+                                BorderBrush="#505257"
+                                BorderThickness="1">
+                                <Grid RowDefinitions="*, *">
+                                    <Image Width="15" Source="/Assets/upload.png" />
+                                    <TextBlock
+                                        Grid.Row="1"
+                                        HorizontalAlignment="Center"
+                                        Foreground="#7f8083"
+                                        Text="Upload file" />
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
