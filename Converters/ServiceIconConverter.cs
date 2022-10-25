@@ -14,7 +14,15 @@ public class ServiceIconConverter : IValueConverter
     {
         var iconPath = value as string;
         var locator = AvaloniaLocator.Current.GetService<IAssetLoader>();
-        var icon = new Bitmap(locator.Open(new Uri(@"avares://MultiClouding/Assets/" + iconPath)));
+        Bitmap icon;
+        try
+        {
+            icon = new Bitmap(locator.Open(new Uri(@"avares://MultiClouding/Assets/" + iconPath)));
+        }
+        catch (Exception e)
+        {
+           icon = new Bitmap(locator.Open(new Uri(@"avares://MultiClouding/Assets/avalonia-logo.ico")));
+        }
         return icon;
     }
 

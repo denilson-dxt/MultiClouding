@@ -19,7 +19,7 @@ public class GoogleDriveService : ICloudService
     public string GetIcon() => "google-drive.png";
 
 
-    public async Task<ICloudService> Authenticate()
+    public async Task<ICloudService> Authenticate(object? authenticationArgs = null)
     {
         UserCredential credential;
         using (var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.ReadWrite))

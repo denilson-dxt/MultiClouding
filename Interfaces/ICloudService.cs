@@ -8,7 +8,7 @@ public interface ICloudService
 {
     public string GetName();
     public string GetIcon();
-    public  Task<ICloudService> Authenticate();
+    public  Task<ICloudService> Authenticate(object? authenticationArgs = null);
     public Task<List<CloudFile>> GetFiles();
     public Task DownloadFile(CloudFile file);
     public Task UploadFile(CloudFile file);
