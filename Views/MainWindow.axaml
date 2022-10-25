@@ -3,6 +3,7 @@
         xmlns:vm="using:MultiClouding.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:conv="clr-namespace:MultiClouding.Converters"
         mc:Ignorable="d" d:DesignWidth="1100" d:DesignHeight="850"
         x:Class="MultiClouding.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
@@ -19,6 +20,9 @@
     <Design.DataContext>
         <vm:MainWindowViewModel />
     </Design.DataContext>
+    <Window.Resources>
+        <conv:ServiceIconConverter x:Key="ServiceIconConverter"/>
+    </Window.Resources>
     <Border Padding="10">
         <Grid RowDefinitions="30,1, *">
             <Separator Grid.Row="1" Background="#21242e"></Separator>
@@ -160,7 +164,7 @@
                                                                         VerticalAlignment="Top"
                                                                         Width="25"
                                                                         HorizontalAlignment="Left"
-                                                                        Source="/Assets/avalonia-logo.ico" />
+                                                                        Source="{Binding Icon, Converter={StaticResource ServiceIconConverter}}" />
                                                                     <TextBlock
                                                                         Text="..."
                                                                         Cursor="Hand"
@@ -237,7 +241,7 @@
                                                                         VerticalAlignment="Top"
                                                                         Width="25"
                                                                         HorizontalAlignment="Left"
-                                                                        Source="/Assets/avalonia-logo.ico" />
+                                                                        Source="{Binding Icon, Converter={StaticResource ServiceIconConverter}}" />
                                                                     <TextBlock
                                                                         Text="..."
                                                                         Cursor="Hand"
@@ -572,7 +576,7 @@
                                 <Canvas Background="#1f2128" Margin="0,60,0,0">
                                     <Image 
                                         VerticalAlignment="Center"
-                                        Source="/Assets/dropbox.png"
+                                        Source="{Binding SelectedService.Icon, Converter={StaticResource ServiceIconConverter}}"
                                         Margin="75, -30, 0,0"
                                         Width="30"
                                         HorizontalAlignment="Center"/>

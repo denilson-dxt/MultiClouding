@@ -7,6 +7,7 @@ namespace MultiClouding.Interfaces;
 public interface ICloudService
 {
     public string GetName();
+    public string GetIcon();
     public  Task<ICloudService> Authenticate();
     public Task<List<CloudFile>> GetFiles();
     public Task DownloadFile(CloudFile file);

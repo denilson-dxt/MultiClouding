@@ -16,7 +16,8 @@ public class GoogleDriveService : ICloudService
 {
     private DriveService _service;
     public string GetName() => "Google drive";
-   
+    public string GetIcon() => "google-drive.png";
+
 
     public async Task<ICloudService> Authenticate()
     {

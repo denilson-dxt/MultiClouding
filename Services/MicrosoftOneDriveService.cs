@@ -21,6 +21,7 @@ public class MicrosoftOneDriveService : ICloudService
     private GraphServiceClient _graphServiceClient = null;
     private AccessToken _accessToken;
     public string GetName() => "Microsoft OneDrive";
+    public string GetIcon() => "onedrive.png";
 
     public async Task<ICloudService> Authenticate()
     {

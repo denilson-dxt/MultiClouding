@@ -30,5 +30,6 @@ public class CloudServiceViewModel: ViewModelBase
     {
         Service = service;
         Name = service.GetName();
+        Icon = service.GetIcon();
     }
 }

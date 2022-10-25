@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 using System.Text;
@@ -70,6 +71,10 @@ namespace MultiClouding.ViewModels
                     var add = new AddAccountsWindowViewModel();
                     var r = await ShowAddAccountsWindow.Handle(add);
                     Services = add.Services;
+                    if (Services.Count > 0)
+                    {
+                        SelectedService = Services.First();
+                    }
                 });
             });
 
