@@ -406,6 +406,7 @@
                                             <Style Selector="DataGridRow">
                                                 <Setter Property="Margin" Value="0,0,0,15" />
                                                 <Setter Property="Height" Value="50" />
+                                                <Setter Property="Cursor" Value="Hand"/>
                                                 <Setter Property="Template">
                                                     <ControlTemplate>
                                                         <DataGridFrozenGrid Name="PART_Root"
@@ -492,7 +493,10 @@
                                                             Foreground="#bababc"
                                                             VerticalAlignment="Center"
                                                             Margin="10,0,0,0"
-                                                            Text="{Binding Name}" />
+                                                            ToolTip.Tip="{Binding Name}"
+                                                            Text="{Binding Name}">
+                                                            
+                                                        </TextBlock>
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn>
