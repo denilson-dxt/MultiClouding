@@ -311,7 +311,7 @@
                                             <Style Selector="ListBoxItem">
                                                 <Setter Property="Cursor" Value="Hand" />
                                                 <Setter Property="Width" Value="150" />
-                                                <Setter Property="Height" Value="90" />
+                                                <Setter Property="Height" Value="100" />
                                                 <Setter Property="Margin" Value="0,0,10,10" />
                                                 <Setter Property="CornerRadius" Value="6" />
                                                 <Setter Property="Template">
@@ -341,12 +341,13 @@
                                                                             <StackPanel VerticalAlignment="Bottom">
                                                                                 <TextBlock
                                                                                     Margin="0,0,0,5"
+                                                                                    Foreground="#848588"
                                                                                     Text="{Binding Name}" />
 
                                                                                 <Panel Margin="0,0,0,0">
                                                                                     <Panel.Styles>
                                                                                         <Style
-                                                                                            Selector="Panel > TextBlock">
+                                                                                            Selector="Panel > StackPanel > TextBlock">
                                                                                             <Setter
                                                                                                 Property="Foreground"
                                                                                                 Value="#515257" />
@@ -355,9 +356,11 @@
                                                                                                 Value="11" />
                                                                                         </Style>
                                                                                     </Panel.Styles>
-                                                                                    <TextBlock Text="Modified at: " />
-                                                                                    <TextBlock Text="{Binding LastModified}"
-                                                                                        HorizontalAlignment="Right" />
+                                                                                    <StackPanel>
+                                                                                        <TextBlock Text="Modified at: " />
+                                                                                        <TextBlock  Text="{Binding LastModified}"
+                                                                                            HorizontalAlignment="Left" />
+                                                                                    </StackPanel>
                                                                                 </Panel>
                                                                             </StackPanel>
                                                                         </Panel>

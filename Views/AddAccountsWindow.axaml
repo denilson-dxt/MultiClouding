@@ -9,7 +9,8 @@
 
     <Grid>
         <StackPanel>
-            <Button Command="{Binding AddGoogleDriveCommand}" Content="Google drive"/>
+            <Button Command="{Binding AddGoogleDriveCommand}" Content="Google drive account"/>
+            <Button Command="{Binding AddMicrosoftOneDriveCommand}" Content="Microsoft One Drive account"/>
         </StackPanel>
     </Grid>
 </Window>
