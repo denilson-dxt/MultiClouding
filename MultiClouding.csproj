@@ -26,6 +26,7 @@
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.13" />
         <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.13" />
         <PackageReference Include="Azure.Identity" Version="1.9.0-beta.1" />
+        <PackageReference Include="Dropbox.Api" Version="6.33.0" />
         <PackageReference Include="Google.Apis.Drive.v2" Version="1.57.0.2831" />
         <PackageReference Include="MegaApiClient" Version="1.10.3" />
         <PackageReference Include="Microsoft.Graph" Version="4.27.0" />

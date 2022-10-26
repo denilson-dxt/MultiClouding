@@ -41,12 +41,24 @@ public class AddAccountsWindowViewModel : ViewModelBase
             var serviceModel = new CloudServiceViewModel(loginMega.Service);
             Services.Add(serviceModel);
         });
+        AddDropBoxCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            var service = await new DropBoxService().Authenticate();
+            var serviceViewModel = new CloudServiceViewModel(service);
+            Services.Add(serviceViewModel);
+        });
 
     }
     public ReactiveCommand<Unit, Unit> AddGoogleDriveCommand { get; set; }
     public ReactiveCommand<Unit, Unit> AddMicrosoftOneDriveCommand { get; set; }
     public ReactiveCommand<Unit, Unit> AddMegaCommand { get; set; }
-    
-    
+    public ReactiveCommand<Unit, Unit> AddDropBoxCommand { get; set; }
+
+   
     public Interaction<LoginMegaAccountViewModel, Unit> ShowLoginMegaWindow { get; set; }
+        
+   
+    public ReactiveCommand<Unit, Unit> AddGoogleDriveCommand { get; set; }
+    public ReactiveCommand<Unit, Unit> AddMicrosoftOneDriveCommand { get; set; }
+
 }
