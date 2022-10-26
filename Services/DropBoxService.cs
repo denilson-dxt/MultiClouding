@@ -25,7 +25,7 @@ public class DropBoxService : ICloudService
     public string GetName() => "DropBox";
     public string GetIcon() => "dropbox.png";
 
-    public async Task<ICloudService> Authenticate()
+    public async Task<ICloudService> Authenticate(object? authenticationArgs = null)
     {
         var settings = DropBoxSettings.GetStored();
         if (settings != null)

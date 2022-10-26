@@ -58,7 +58,5 @@ public class AddAccountsWindowViewModel : ViewModelBase
     public Interaction<LoginMegaAccountViewModel, Unit> ShowLoginMegaWindow { get; set; }
         
    
-    public ReactiveCommand<Unit, Unit> AddGoogleDriveCommand { get; set; }
-    public ReactiveCommand<Unit, Unit> AddMicrosoftOneDriveCommand { get; set; }
 
 }
