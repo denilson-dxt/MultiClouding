@@ -30,7 +30,14 @@ public class AddAccountsWindowViewModel : ViewModelBase
             var serviceViewModel = new CloudServiceViewModel(service);
             Services.Add(serviceViewModel);
         });
+        AddDropBoxCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            var service = await new DropBoxService().Authenticate();
+            var serviceViewModel = new CloudServiceViewModel(service);
+            Services.Add(serviceViewModel);
+        });
     }
     public ReactiveCommand<Unit, Unit> AddGoogleDriveCommand { get; set; }
     public ReactiveCommand<Unit, Unit> AddMicrosoftOneDriveCommand { get; set; }
+    public ReactiveCommand<Unit, Unit> AddDropBoxCommand { get; set; }
 }
