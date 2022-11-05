@@ -45,6 +45,11 @@ public class MegaService : ICloudService
         return files;
     }
 
+    public async Task<UserInfo> GetUserInfo()
+    {
+        return new UserInfo();
+    }
+
     public async Task DownloadFile(CloudFile file)
     {
         throw new System.NotImplementedException();

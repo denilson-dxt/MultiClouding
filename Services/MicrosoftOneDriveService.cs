@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -64,6 +65,20 @@ public class MicrosoftOneDriveService : ICloudService
             });
         }
         return files;
+    }
+
+    public async Task<UserInfo> GetUserInfo()
+    {
+        var users = await _graphServiceClient.Users.Request().GetAsync();
+        var user = users.First();
+        var pr = await _graphServiceClient.Me.Photo.Content.Request().GetAsync();
+        
+        return new UserInfo()
+        {
+            Username = user.DisplayName,
+            Email = user.UserPrincipalName,
+            ProfilePictureStream = pr
+        };
     }
 
     public async Task DownloadFile(CloudFile file)

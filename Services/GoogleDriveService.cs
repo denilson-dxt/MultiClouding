@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
@@ -58,6 +59,26 @@ public class GoogleDriveService : ICloudService
         return files;
     }
 
+    public async Task<UserInfo> GetUserInfo()
+    {
+        var about = await _service.About.Get().ExecuteAsync();
+        var imageStream = await _getProfilePictureStreamFromUrl(about.User.Picture.Url);
+        
+        return new UserInfo()
+        {
+            Username = about.User.DisplayName,
+            Email = about.User.EmailAddress,
+            ProfilePictureStream = imageStream
+        };
+    }
+
+    private static async Task<Stream> _getProfilePictureStreamFromUrl(string url)
+    {
+        var client = new HttpClient();
+        var res = await client.GetAsync(url);
+        return await res.Content.ReadAsStreamAsync();
+        //return res;
+    }
     public async Task DownloadFile(CloudFile file)
     {
         throw new System.NotImplementedException();
