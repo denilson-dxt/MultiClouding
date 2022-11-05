@@ -47,7 +47,7 @@ public class MegaService : ICloudService
 
     public async Task<UserInfo> GetUserInfo()
     {
-        throw new NotImplementedException();
+        return new UserInfo();
     }
 
     public async Task DownloadFile(CloudFile file)
