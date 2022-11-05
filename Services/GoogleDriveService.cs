@@ -58,6 +58,11 @@ public class GoogleDriveService : ICloudService
         return files;
     }
 
+    public async Task<UserInfo> GetUserInfo()
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task DownloadFile(CloudFile file)
     {
         throw new System.NotImplementedException();

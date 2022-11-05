@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Dropbox.Api;
 using Dropbox.Api.Users;
@@ -127,6 +128,25 @@ public class DropBoxService : ICloudService
             files.Add(cloudFile);
         }
         return files;
+    }
+
+    public async Task<UserInfo> GetUserInfo()
+    {
+        var user = await _client.Users.GetCurrentAccountAsync();
+        var imageStream = await _getProfilePictureStreamFromUrl(user.ProfilePhotoUrl);
+        return new UserInfo()
+        {
+            Username = user.Name.DisplayName,
+            Email = user.Email,
+            ProfilePictureStream = imageStream
+        };
+    }
+
+    private static async Task<Stream> _getProfilePictureStreamFromUrl(string url)
+    {
+        var client = new HttpClient();
+        var res = await client.GetStreamAsync(url);
+        return res;
     }
 
     public async Task DownloadFile(CloudFile file)
