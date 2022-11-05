@@ -63,6 +63,7 @@ public class GoogleDriveService : ICloudService
     {
         var about = await _service.About.Get().ExecuteAsync();
         var imageStream = await _getProfilePictureStreamFromUrl(about.User.Picture.Url);
+        
         return new UserInfo()
         {
             Username = about.User.DisplayName,
@@ -74,8 +75,9 @@ public class GoogleDriveService : ICloudService
     private static async Task<Stream> _getProfilePictureStreamFromUrl(string url)
     {
         var client = new HttpClient();
-        var res = await client.GetStreamAsync(url);
-        return res;
+        var res = await client.GetAsync(url);
+        return await res.Content.ReadAsStreamAsync();
+        //return res;
     }
     public async Task DownloadFile(CloudFile file)
     {

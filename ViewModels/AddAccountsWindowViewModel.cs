@@ -26,14 +26,12 @@ public class AddAccountsWindowViewModel : ViewModelBase
         {
             var service = await new GoogleDriveService().Authenticate();
             var serviceViewModel = new CloudServiceViewModel(service);
-            await service.GetUserInfo();
             Services.Add(serviceViewModel);
         });
         AddMicrosoftOneDriveCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             var service = await new MicrosoftOneDriveService().Authenticate();
             var serviceViewModel = new CloudServiceViewModel(service);
-            await service.GetUserInfo();
             Services.Add(serviceViewModel);
         });
         AddMegaCommand = ReactiveCommand.CreateFromTask(async () =>
@@ -41,14 +39,12 @@ public class AddAccountsWindowViewModel : ViewModelBase
             var loginMega = new LoginMegaAccountViewModel();
             var credentials = await ShowLoginMegaWindow.Handle(loginMega);
             var serviceModel = new CloudServiceViewModel(loginMega.Service);
-            await serviceModel.Service.GetUserInfo();
             Services.Add(serviceModel);
         });
         AddDropBoxCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             var service = await new DropBoxService().Authenticate();
             var serviceViewModel = new CloudServiceViewModel(service);
-            await service.GetUserInfo();
             Services.Add(serviceViewModel);
         });
 
