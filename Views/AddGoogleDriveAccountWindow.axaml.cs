@@ -1,22 +1,21 @@
 using System;
-using System.Reactive;
-using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using MultiClouding.ViewModels;
 using ReactiveUI;
 
 namespace MultiClouding.Views;
-public partial class LoginMegaAccount : ReactiveWindow<LoginMegaAccountViewModel>
+
+public partial class AddGoogleDriveAccountWindow : ReactiveWindow<AddGoogleAccountWindowViewModel>
 {
-    public LoginMegaAccount()
+    public AddGoogleDriveAccountWindow()
     {
         InitializeComponent();
 #if DEBUG
         this.AttachDevTools();
         this.WhenActivated(d => d(ViewModel!.CloseCommand.Subscribe(Close)));
-
 #endif
     }
 
@@ -24,6 +23,4 @@ public partial class LoginMegaAccount : ReactiveWindow<LoginMegaAccountViewModel
     {
         AvaloniaXamlLoader.Load(this);
     }
-
-
 }

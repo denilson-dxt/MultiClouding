@@ -1,14 +1,17 @@
 using System.Reactive;
+using System.Threading.Tasks;
 using CG.Web.MegaApiClient;
 using MultiClouding.Interfaces;
 using MultiClouding.Services;
+using MultiClouding.Views;
 using ReactiveUI;
 
 namespace MultiClouding.ViewModels;
 
-public class LoginMegaAccountViewModel : ViewModelBase
+public class LoginMegaAccountViewModel : ServiceRegisterViewModelBase
 {
     private string _email;
+    public override object WindowType { get; set; } = typeof(LoginMegaAccount);
 
     public string Email
     {
@@ -23,7 +26,9 @@ public class LoginMegaAccountViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _password, value);
     }
 
-    public ICloudService Service;
+    // public ICloudService Service;
+    public override ICloudService Service { get; set; }
+
     public LoginMegaAccountViewModel()
     {
         CloseCommand = ReactiveCommand.Create(() =>
@@ -35,10 +40,12 @@ public class LoginMegaAccountViewModel : ViewModelBase
             MegaApiClient client = new MegaApiClient();
             client.Login(Email, Password);
             Service = await new MegaService().Authenticate(client);
-            return Service;
+            //CloseCommand.Execute();
+            //return Service;
         });
     }
-    
-    public ReactiveCommand<Unit, ICloudService> LoginCommand { get; set; }
+
+    public ReactiveCommand<Unit, Unit> LoginCommand { get; set; }
     public ReactiveCommand<Unit, ICloudService> CloseCommand { get; set; }
+    
 }
