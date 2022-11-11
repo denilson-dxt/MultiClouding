@@ -5,14 +5,62 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MultiClouding.Views.AddAccountsWindow"
         Title="AddAccountsWindow"
-        TransparencyLevelHint="AcrylicBlur">
+        TransparencyLevelHint="AcrylicBlur"
+        Background="#1f2128">
 
-    <Grid>
-        <StackPanel>
+    <Grid ColumnDefinitions="*,*">
+        <!--<StackPanel>
             <Button Command="{Binding AddGoogleDriveCommand}" Content="Google drive account"/>
             <Button Command="{Binding AddMicrosoftOneDriveCommand}" Content="Microsoft One Drive account"/>
             <Button Command="{Binding AddMegaCommand}" Content="Mega"/>
             <Button Command="{Binding AddDropBoxCommand}" Content="Dropbox"/>
+        </StackPanel>-->
+        <ListBox 
+            SelectedItem="{Binding SelectedRegister}"
+            Items="{Binding Registers}"
+            >
+            <ListBox.Styles>
+                <Style Selector="ListBox">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="ItemsPanel">
+                        <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </Setter>
+                </Style>
+                <Style Selector="ListBox > ListBoxItem">
+                    <Setter Property="Template">
+                        <ControlTemplate>
+                           <ContentPresenter 
+                               Name="PART_ContentPresenter"
+                               Content="{TemplateBinding Content}">
+                               <ContentPresenter.ContentTemplate>
+                                   <DataTemplate>
+                                       <Grid 
+                                           Width="100"
+                                           Height="50"
+                                           Margin="0,0,10,5">
+                                           <TextBlock 
+                                               TextAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Text="{Binding ServiceName}"/>
+                                       </Grid>
+                                   </DataTemplate>
+                               </ContentPresenter.ContentTemplate>
+                           </ContentPresenter>
+                        </ControlTemplate>
+                    </Setter>
+                </Style>
+            </ListBox.Styles>
+        </ListBox>
+        <StackPanel  Grid.Column="1" Background="#0e1017">
+            <!--<TextBlock Text="Service status" TextAlignment="Center"/>
+            <TextBlock Text="Active"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="User: "/>
+                <TextBlock Text="Denilson Tivane"/>
+            </StackPanel>-->
+            <Button Command="{Binding AuthenticateServiceCommand}" Content="Authenticate"/>
         </StackPanel>
     </Grid>
 </Window>
