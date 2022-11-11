@@ -12,6 +12,7 @@ public class LoginMegaAccountViewModel : ServiceRegisterViewModelBase
 {
     private string _email;
     public override object WindowType { get; set; } = typeof(LoginMegaAccount);
+    public override string ServiceName { get; set; } = "Mega";
 
     public string Email
     {
