@@ -22,7 +22,8 @@ public class AddAccountsWindowViewModel : ViewModelBase
     private ObservableCollection<ServiceRegisterViewModelBase> _registers = new ObservableCollection<ServiceRegisterViewModelBase>()
     {
         new AddGoogleAccountWindowViewModel(),
-        new LoginMegaAccountViewModel()
+        new LoginMegaAccountViewModel(),
+        new MicrosoftOneDriveRegisterViewModel()
     };
 
     public ObservableCollection<ServiceRegisterViewModelBase> Registers

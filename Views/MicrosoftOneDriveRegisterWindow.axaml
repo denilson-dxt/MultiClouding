@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="MultiClouding.Views.MicrosoftOneDriveRegisterWindow"
+        Title="MicrosoftOneDriveRegisterWindow">
+    <StackPanel>
+        <TextBlock>Microsoft One drive</TextBlock>
+        
+        <Button Content="Click here to login with microsoft one drive" Command="{Binding LoginCommand}"/>
+        
+        <TextBlock>Post the code bellow on the browser we've opened for you</TextBlock>
+        <TextBox  Text="{Binding Code}"/>
+        <Button Command="{Binding CloseCommand}" IsVisible="{Binding HasFinished}" Content="Finish login"/>
+    </StackPanel>
+</Window>
