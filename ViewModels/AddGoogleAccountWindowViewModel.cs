@@ -13,11 +13,17 @@ public class AddGoogleAccountWindowViewModel : ServiceRegisterViewModelBase
     public override object WindowType { get; set; } = typeof(AddGoogleDriveAccountWindow);
 
     private string _closeBtnText = "Do not close yet";
-
     public string CloseBtnText
     {
         get => _closeBtnText;
         set => this.RaiseAndSetIfChanged(ref _closeBtnText, value);
+    }
+
+    private bool _hasFinished;
+    public bool HasFinished
+    {
+        get => _hasFinished;
+        set => this.RaiseAndSetIfChanged(ref _hasFinished, value);
     }
     
     // public ICloudService Service { get; set; }
@@ -31,10 +37,11 @@ public class AddGoogleAccountWindowViewModel : ServiceRegisterViewModelBase
         {
             return Service;
         });
-        Task.Run(async () =>
+        
+        LoginCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             await _authenticate();
-            CloseBtnText = "Close";
+            HasFinished = true;
         });
     }
 
@@ -44,4 +51,5 @@ public class AddGoogleAccountWindowViewModel : ServiceRegisterViewModelBase
         Service = await new GoogleDriveService().Authenticate();
     }
     public ReactiveCommand<Unit, ICloudService> CloseCommand { get; set; }
+    public ReactiveCommand<Unit, Unit> LoginCommand { get; set; }
 }
