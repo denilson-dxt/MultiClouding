@@ -19,7 +19,7 @@ public class MicrosoftOneDriveRegisterViewModel : ServiceRegisterViewModelBase
     public override object WindowType { get; set; } = typeof(MicrosoftOneDriveRegisterWindow);
     public override ICloudService Service { get; set; }
 
-    private string _code;
+    private string _code = "Click on login to get the code";
     public string Code
     {
         get => _code;
@@ -51,7 +51,6 @@ public class MicrosoftOneDriveRegisterViewModel : ServiceRegisterViewModelBase
     }
     private async Task _authenticate()
     {
-        var service = new MicrosoftOneDriveService();
         string[] scopes = {"User.Read"};
         var clientId = "a1caf8f9-f772-4138-9546-7145a34d2d05";
         var tenantId = "f8cdef31-a31e-4b4a-93e4-5f571e91255a";
@@ -69,7 +68,8 @@ public class MicrosoftOneDriveRegisterViewModel : ServiceRegisterViewModelBase
         var graphServiceClient = new GraphServiceClient(deviceAuth, scopes); // you can pass the TokenCredential directly to the GraphServiceClient
         var token  = await deviceAuth.GetTokenAsync(new TokenRequestContext(scopes));
         HasFinished = true;
-        return;
+        
+        Service = new MicrosoftOneDriveService().Authenticate(graphServiceClient, token);
     }
     public ReactiveCommand<Unit, ICloudService> CloseCommand { get; set; }
     public ReactiveCommand<Unit, Unit> LoginCommand { get; set; }
