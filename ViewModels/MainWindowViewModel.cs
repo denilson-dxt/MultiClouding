@@ -59,6 +59,15 @@ namespace MultiClouding.ViewModels
             get => _files;
             set => this.RaiseAndSetIfChanged(ref _files, value);
         }
+
+        private FileViewModel _selectedFolder;
+
+        public FileViewModel SelectedFolder
+        {
+            get => _selectedFolder;
+            set => this.RaiseAndSetIfChanged(ref _selectedFolder, value);
+        }
+        
         public MainWindowViewModel()
         {
             Services = new ObservableCollection<CloudServiceViewModel>();
@@ -78,7 +87,10 @@ namespace MultiClouding.ViewModels
                 });
             });
 
-
+            OpenFolderCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var id = SelectedFolder.Name;
+            });
         }
         
         private async Task _getFiles()
@@ -95,6 +107,7 @@ namespace MultiClouding.ViewModels
         }
         
         public Interaction<AddAccountsWindowViewModel, Unit> ShowAddAccountsWindow { get; set; }
+        public ReactiveCommand<Unit, Unit> OpenFolderCommand { get; set; }
         public ReactiveCommand<Unit, Unit> Test { get; set; }
     }
 }
