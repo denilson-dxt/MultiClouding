@@ -75,8 +75,9 @@ public class AddAccountsWindowViewModel : ViewModelBase
         ShowAuthWindow = new Interaction<ServiceRegisterViewModelBase, ICloudService>();
         AuthenticateServiceCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            Services.Add(new CloudServiceViewModel(await ShowAuthWindow.Handle(SelectedRegister)));
-            //Services.Add(await service.Authenticate());
+            var service = await ShowAuthWindow.Handle(SelectedRegister);
+            if (service is null) return;
+            Services.Add(new CloudServiceViewModel(service));
         });
 
     }
