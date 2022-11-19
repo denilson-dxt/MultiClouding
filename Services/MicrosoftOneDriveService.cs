@@ -24,9 +24,11 @@ public class MicrosoftOneDriveService : ICloudService
     public string GetName() => "Microsoft OneDrive";
     public string GetIcon() => "onedrive.png";
 
-    public async Task<ICloudService> Authenticate(object? authenticationArgs = null)
+    public ICloudService Authenticate(GraphServiceClient graphServiceClient, AccessToken accessToken)
     {
-        await _authorize();
+        _graphServiceClient = graphServiceClient;
+        _accessToken = accessToken;
+        //await _authorize();
         return this;
     }
     private async Task _authorize()

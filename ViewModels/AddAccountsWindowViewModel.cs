@@ -22,7 +22,8 @@ public class AddAccountsWindowViewModel : ViewModelBase
     private ObservableCollection<ServiceRegisterViewModelBase> _registers = new ObservableCollection<ServiceRegisterViewModelBase>()
     {
         new AddGoogleAccountWindowViewModel(),
-        new LoginMegaAccountViewModel()
+        new LoginMegaAccountViewModel(),
+        new MicrosoftOneDriveRegisterViewModel()
     };
 
     public ObservableCollection<ServiceRegisterViewModelBase> Registers
@@ -52,9 +53,9 @@ public class AddAccountsWindowViewModel : ViewModelBase
         });
         AddMicrosoftOneDriveCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            var service = await new MicrosoftOneDriveService().Authenticate();
+            /*var service = await new MicrosoftOneDriveService().Authenticate();
             var serviceViewModel = new CloudServiceViewModel(service);
-            Services.Add(serviceViewModel);
+            Services.Add(serviceViewModel);*/
         });
         AddMegaCommand = ReactiveCommand.CreateFromTask(async () =>
         {

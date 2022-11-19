@@ -55,7 +55,6 @@ public class GoogleDriveService : ICloudService
                 Type = file.AlternateLink.Contains("folders") ? CloudFileType.Folder : CloudFileType.File
             });
         }
-
         return files;
     }
 
