@@ -7,6 +7,13 @@ namespace MultiClouding.ViewModels;
 
 public class FileViewModel : ViewModelBase
 {
+    private string _id;
+
+    public string Id
+    {
+        get => _id;
+        set => this.RaiseAndSetIfChanged(ref _id, value);
+    }
     private string _name;
     public string Name
     {
@@ -38,6 +45,7 @@ public class FileViewModel : ViewModelBase
 
     public FileViewModel(CloudFile file)
     {
+        Id = file.Id;
         Name = file.Name;
         Type = file.Type;
         LastModified = file.ModifiedAt;

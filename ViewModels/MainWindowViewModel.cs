@@ -89,13 +89,16 @@ namespace MultiClouding.ViewModels
 
             OpenFolderCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                var id = SelectedFolder.Name;
+                var id = SelectedFolder.Id;
+                _getFiles(id);
             });
         }
         
-        private async Task _getFiles()
+        private async Task _getFiles(string parentId="")
         {
-            var files = await SelectedService.Service.GetFiles();
+            var files = await SelectedService.Service.GetFiles(parentId);
+            Folders.Clear();
+            Files.Clear();
             foreach (var file in files)
             {
                 var fileViewModel = new FileViewModel(file);

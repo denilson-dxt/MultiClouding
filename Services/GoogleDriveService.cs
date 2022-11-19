@@ -38,17 +38,20 @@ public class GoogleDriveService : ICloudService
         return new GoogleDriveService(){_service = service};
     }
 
-    public async Task<List<CloudFile>> GetFiles(string parentId="")
+    public async Task<List<CloudFile>> GetFiles(string parentId="root")
     {
+        if (String.IsNullOrWhiteSpace(parentId))
+            parentId = "root";
         var files = new List<CloudFile>();
         var request = _service.Files.List();
-        request.Q = "'root' in parents";
+        request.Q = $"'{parentId}' in parents";
         request.OrderBy = "folder";
         var dFiles = request.Execute();
         foreach (var file in dFiles.Items)
         {
             files.Add(new CloudFile()
             {
+                Id = file.Id,
                 Name = file.Title,
                 Link = file.AlternateLink,
                 ModifiedAt = (DateTime) file.ModifiedDate,
