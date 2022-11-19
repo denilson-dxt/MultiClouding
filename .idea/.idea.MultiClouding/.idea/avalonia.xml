@@ -6,6 +6,7 @@
         <entry key="App.axaml" value="MultiClouding.csproj" />
         <entry key="Views/AddAccountsWindow.axaml" value="MultiClouding.csproj" />
         <entry key="Views/AddGoogleDriveAccountWindow.axaml" value="MultiClouding.csproj" />
+        <entry key="Views/DropBoxRegisterWindow.axaml" value="MultiClouding.csproj" />
         <entry key="Views/LoginMegaAccount.axaml" value="MultiClouding.csproj" />
         <entry key="Views/MainWindow.axaml" value="MultiClouding.csproj" />
         <entry key="Views/MegaTestWindow.axaml" value="MultiClouding.csproj" />

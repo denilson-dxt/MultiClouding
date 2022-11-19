@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="250"
+        x:Class="MultiClouding.Views.DropBoxRegisterWindow"
+        Title="DropBoxRegisterWindow"
+        Background="#1f2128"
+        Width="225"
+        Height="250">
+    <Border Padding="5">
+        <StackPanel HorizontalAlignment="Stretch" Margin="0,10,0,0">
+            <TextBlock
+                TextAlignment="Center"
+                Text="DropBox"/>
+            <Button 
+                Margin="0,20,0,0"
+                HorizontalAlignment="Stretch"
+                IsVisible="{Binding !HasFinished}"
+                Content="Login" 
+                Command="{Binding LoginCommand}"/>
+            <Button 
+                IsVisible="{Binding HasFinished}"
+                HorizontalAlignment="Stretch"
+                Command="{Binding CloseCommand}"
+                Content="Finish Login"/>
+        </StackPanel>
+    </Border>
+</Window>

@@ -23,7 +23,8 @@ public class AddAccountsWindowViewModel : ViewModelBase
     {
         new AddGoogleAccountWindowViewModel(),
         new LoginMegaAccountViewModel(),
-        new MicrosoftOneDriveRegisterViewModel()
+        new MicrosoftOneDriveRegisterViewModel(),
+        new DropBoxRegisterViewModel()
     };
 
     public ObservableCollection<ServiceRegisterViewModelBase> Registers
