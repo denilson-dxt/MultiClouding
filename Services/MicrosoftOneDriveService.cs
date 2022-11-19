@@ -48,7 +48,7 @@ public class MicrosoftOneDriveService : ICloudService
        
     }
 
-    public async Task<List<CloudFile>> GetFiles()
+    public async Task<List<CloudFile>> GetFiles(string parentId="")
     {
         var files = new List<CloudFile>();
         var requestHeaders = new List<HeaderOption>()

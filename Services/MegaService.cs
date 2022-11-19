@@ -24,7 +24,7 @@ public class MegaService : ICloudService
         return this;
     }
 
-    public async Task<List<CloudFile>> GetFiles()
+    public async Task<List<CloudFile>> GetFiles(string parentId="")
     {
         var nodes = await _client.GetNodesAsync();
         var files = new List<CloudFile>();

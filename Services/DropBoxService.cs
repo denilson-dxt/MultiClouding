@@ -102,7 +102,7 @@ public class DropBoxService : ICloudService
     }
     
     
-    public async Task<List<CloudFile>> GetFiles()
+    public async Task<List<CloudFile>> GetFiles(string parentId="")
     {
         var files = new List<CloudFile>();
         var dFiles = await _client.Files.ListFolderAsync(string.Empty);

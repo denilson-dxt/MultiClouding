@@ -38,7 +38,7 @@ public class GoogleDriveService : ICloudService
         return new GoogleDriveService(){_service = service};
     }
 
-    public async Task<List<CloudFile>> GetFiles()
+    public async Task<List<CloudFile>> GetFiles(string parentId="")
     {
         var files = new List<CloudFile>();
         var request = _service.Files.List();
